@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch438obqqqwh0"]
+
+[ext_resource type="Script" path="res://scenes/entities/characters/illia.gd" id="1_w3cxd"]
+[ext_resource type="Texture2D" uid="uid://dm135o7ahj2fa" path="res://assets/buggirl spritesheet.png" id="2_x7lli"]
+[ext_resource type="PackedScene" uid="uid://bsxya4668ciaf" path="res://scenes/components/jump_component.tscn" id="4_sybrs"]
+[ext_resource type="PackedScene" uid="uid://cjihpw8bk4iok" path="res://scenes/components/movement_component.tscn" id="5_pv2p6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5e4o8"]
+size = Vector2(33, 108)
+
+[node name="Illia" type="CharacterBody2D"]
+script = ExtResource("1_w3cxd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_x7lli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 11)
+shape = SubResource("RectangleShape2D_5e4o8")
+
+[node name="MovementComponent" parent="." instance=ExtResource("5_pv2p6")]
+
+[node name="JumpComponent" parent="." instance=ExtResource("4_sybrs")]
+position = Vector2(900.506, 378.058)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -72)

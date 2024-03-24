@@ -1,0 +1,131 @@
+[gd_scene load_steps=14 format=3 uid="uid://c8ogttmw77hpd"]
+
+[ext_resource type="Texture2D" uid="uid://bsvxjsi37txr2" path="res://assets/rat spritesheet.png" id="1_b4gql"]
+[ext_resource type="Script" path="res://scenes/entities/characters/Rat.gd" id="1_go5ud"]
+[ext_resource type="PackedScene" uid="uid://7gdu40x03aqe" path="res://scenes/components/player_components/input_handler.tscn" id="3_24mpu"]
+[ext_resource type="PackedScene" uid="uid://76i5anxtwy7p" path="res://scenes/components/movement_handler.tscn" id="4_dorhu"]
+[ext_resource type="PackedScene" uid="uid://dw4503a4c3ar0" path="res://scenes/components/jump_handler.tscn" id="5_cuc4w"]
+[ext_resource type="PackedScene" uid="uid://bmki48b12f6if" path="res://scenes/components/flip_handler.tscn" id="6_1ep1a"]
+
+[sub_resource type="Animation" id="11"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="12"]
+resource_name = "dravfall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="13"]
+resource_name = "dravkneel"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="15"]
+resource_name = "dravright"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="17"]
+resource_name = "idleright"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lg761"]
+_data = {
+"RESET": SubResource("11"),
+"dravfall": SubResource("12"),
+"dravkneel": SubResource("13"),
+"dravright": SubResource("15"),
+"idleright": SubResource("17")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nik3y"]
+size = Vector2(20, 84)
+
+[node name="Rat" type="CharacterBody2D"]
+script = ExtResource("1_go5ud")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.9375, 1)
+texture = ExtResource("1_b4gql")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_lg761")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -72)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_nik3y")
+
+[node name="InputHandler" parent="." instance=ExtResource("3_24mpu")]
+
+[node name="MovementHandler" parent="." instance=ExtResource("4_dorhu")]
+moveSpeed = 200
+gravDown = 60.0
+gravUp = 15.0
+
+[node name="JumpHandler" parent="." instance=ExtResource("5_cuc4w")]
+jump_speed = 200.0
+
+[node name="FlipHandler" parent="." instance=ExtResource("6_1ep1a")]

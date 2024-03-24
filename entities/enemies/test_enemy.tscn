@@ -1,0 +1,186 @@
+[gd_scene load_steps=14 format=3 uid="uid://bv3u33d4yjokw"]
+
+[ext_resource type="Script" path="res://scenes/entities/enemies/test_enemy.gd" id="1_g0gyb"]
+[ext_resource type="Texture2D" uid="uid://d30bj66swer1m" path="res://assets/sprites/enemy_base.png" id="1_q50y2"]
+[ext_resource type="Texture2D" uid="uid://dbwgkiepiflld" path="res://assets/sprites/animations/Enemy_animations/voreanim placeholder.png" id="2_3ve31"]
+[ext_resource type="PackedScene" uid="uid://b3wl1g781vi5m" path="res://scenes/managers/enemy_handler.tscn" id="4_kdsyv"]
+
+[sub_resource type="Animation" id="Animation_766p3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VoreSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BaseSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BaseSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0geue"]
+resource_name = "chase"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_wyk7y"]
+resource_name = "confused"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseSprite:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BaseSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(4, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_weg0t"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nucyd"]
+resource_name = "vore1"
+length = 0.7
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VoreSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1j2gd"]
+_data = {
+"RESET": SubResource("Animation_766p3"),
+"chase": SubResource("Animation_0geue"),
+"confused": SubResource("Animation_wyk7y"),
+"idle": SubResource("Animation_weg0t"),
+"vore1": SubResource("Animation_nucyd")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v4eyd"]
+radius = 23.0
+height = 122.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8lk8"]
+size = Vector2(820, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qc6tf"]
+radius = 35.0
+
+[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("wanderDir") groups=["EnemyActive"]]
+script = ExtResource("1_g0gyb")
+wanderDir = NodePath("EnemyHandler")
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_q50y2")
+
+[node name="VoreSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_3ve31")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+libraries = {
+"": SubResource("AnimationLibrary_1j2gd")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_v4eyd")
+
+[node name="Sight" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("RectangleShape2D_t8lk8")
+
+[node name="Grab" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
+shape = SubResource("CircleShape2D_qc6tf")
+
+[node name="VoreTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 5.0
+one_shot = true
+
+[node name="EnemyHandler" parent="." instance=ExtResource("4_kdsyv")]
+EnemyActive = "EnemyActivePos"
+
+[connection signal="timeout" from="VoreTimer" to="." method="_on_vore_timer_timeout"]

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://g2syweqrqhqb"]
+
+[node name="WK01_entry" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 642.0
+offset_bottom = 32.0
+text = "Make all your tilesets their own scenes and then add them into the relevant rooms."

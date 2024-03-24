@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvjh4svp67clw"]
+
+[ext_resource type="PackedScene" uid="uid://1uew8gmxpkrl" path="res://scenes/managers/upgrades_manager.tscn" id="1_maare"]
+[ext_resource type="Texture2D" uid="uid://dbap6x2bcm24m" path="res://assets/sprites/terrain/overworldtiles.png" id="2_5lmmb"]
+[ext_resource type="PackedScene" uid="uid://bc5hhetbysrdl" path="res://scenes/entities/characters/Owen.tscn" id="3_swqfa"]
+[ext_resource type="PackedScene" uid="uid://d4il7h21p3a34" path="res://scenes/collectibles/sparkle_base.tscn" id="4_2k8sy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mjrc2"]
+texture = ExtResource("2_5lmmb")
+texture_region_size = Vector2i(32, 32)
+3:5/0 = 0
+3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:5/0/physics_layer_0/angular_velocity = 0.0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+4:1/0 = 0
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -12, 16, -12, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_tuw13"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_mjrc2")
+
+[node name="Main" type="Node2D"]
+
+[node name="Manager Container" type="Node" parent="."]
+
+[node name="UpgradesManager" parent="Manager Container" instance=ExtResource("1_maare")]
+
+[node name="sparkleText" type="RichTextLabel" parent="Manager Container/UpgradesManager"]
+offset_left = 220.0
+offset_top = -132.0
+offset_right = 336.0
+offset_bottom = -92.0
+
+[node name="Entity Container" type="Node2D" parent="."]
+
+[node name="SparkleBase" parent="Entity Container" instance=ExtResource("4_2k8sy")]
+position = Vector2(512, -43)
+
+[node name="SparkleBase2" parent="Entity Container" instance=ExtResource("4_2k8sy")]
+position = Vector2(318, 74)
+
+[node name="Owen" parent="Entity Container" instance=ExtResource("3_swqfa")]
+position = Vector2(55, 28)
+
+[node name="Camera2D2" type="Camera2D" parent="Entity Container/Owen"]
+offset = Vector2(0, -72)
+
+[node name="Level Container" type="Node2D" parent="."]
+
+[node name="Level" type="Node2D" parent="Level Container"]
+
+[node name="TileMap" type="TileMap" parent="Level Container/Level"]
+tile_set = SubResource("TileSet_tuw13")
+format = 2
+layer_0/tile_data = PackedInt32Array(327677, 196608, 5, 327678, 196608, 5, 327679, 196608, 5, 262144, 196608, 5, 262145, 196608, 5, 262146, 196608, 5, 262147, 196608, 5, 262148, 196608, 5, 262149, 196608, 5, 262150, 196608, 5, 262151, 196608, 5, 262152, 196608, 5, 262153, 196608, 5, 262154, 196608, 5, 262155, 196608, 5, 262156, 196608, 5, 262157, 196608, 5, 262158, 196608, 5, 262159, 196608, 5, 262160, 196608, 5, 262161, 196608, 5, 262162, 196608, 5, 262163, 196608, 5, 262164, 196608, 5, 15, 196608, 5, 16, 196608, 5, 17, 196608, 5, 18, 196608, 5, 19, 196608, 5, 20, 196608, 5, 21, 196608, 5, 22, 196608, 5, 23, 196608, 5, 24, 196608, 5, 25, 196608, 5, 26, 196608, 5, 27, 196608, 5, 28, 196608, 5, 29, 196608, 5, 30, 196608, 5, 31, 196608, 5, 32, 196608, 5, 65549, 196608, 5, 65550, 196608, 5, 65551, 196608, 5, 65552, 196608, 5, 65553, 196608, 5, 65554, 196608, 5, 196620, 196608, 5, 196621, 196608, 5, 196622, 196608, 5, 196623, 196608, 5, 196624, 196608, 5, 196625, 196608, 5, 196626, 196608, 5, 196627, 196608, 5, 196628, 196608, 5, 196629, 196608, 5, 196630, 196608, 5, 196631, 196608, 5)

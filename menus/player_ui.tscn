@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2lt64uj77jv7"]
+
+[ext_resource type="Script" path="res://scenes/menus/player_ui.gd" id="1_dext0"]
+[ext_resource type="PackedScene" uid="uid://dbcat6eah6dus" path="res://scenes/menus/dialogue_box.tscn" id="1_p8oh7"]
+
+[node name="PlayerUI" type="Node2D"]
+position = Vector2(0, -64)
+script = ExtResource("1_dext0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="DialogueBox" parent="Camera2D" instance=ExtResource("1_p8oh7")]
+visible = false
+position = Vector2(0, 223)
+
+[node name="Box" parent="Camera2D/DialogueBox" index="0"]
+offset = Vector2(0, 200)
+
+[node name="Avatar" parent="Camera2D/DialogueBox" index="1"]
+offset = Vector2(-314, 200)
+
+[node name="DBoxText" parent="Camera2D/DialogueBox" index="2"]
+offset_top = 121.0
+offset_bottom = 277.0
+
+[node name="LineVis3" parent="Camera2D/DialogueBox" index="3"]
+offset = Vector2(0, 200)
+
+[node name="LineVis2" parent="Camera2D/DialogueBox" index="4"]
+offset = Vector2(0, 200)
+
+[node name="LineVis1" parent="Camera2D/DialogueBox" index="5"]
+offset = Vector2(0, 200)
+
+[editable path="Camera2D/DialogueBox"]

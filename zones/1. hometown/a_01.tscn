@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://np4lp2uphpu1"]
+
+[ext_resource type="PackedScene" uid="uid://cqk6ejnid4y31" path="res://scenes/tilesets/tile_map_hometown.tscn" id="1_1ti1l"]
+[ext_resource type="Script" path="res://scenes/zones/1. hometown/a_01.gd" id="1_npo50"]
+[ext_resource type="PackedScene" uid="uid://bc5hhetbysrdl" path="res://scenes/entities/characters/Owen.tscn" id="2_qwrva"]
+[ext_resource type="Texture2D" uid="uid://bbixi8hqrmn5e" path="res://assets/sprites/terrain/Hometown.Owen 0.1.png" id="3_01bkn"]
+[ext_resource type="Texture2D" uid="uid://ck4jt7pd0deo" path="res://assets/sprites/terrain/Hometown.Owen shower.png" id="4_f1iwd"]
+[ext_resource type="PackedScene" uid="uid://c2lt64uj77jv7" path="res://scenes/menus/player_ui.tscn" id="4_ho1cb"]
+[ext_resource type="PackedScene" uid="uid://dh7owtji0y88v" path="res://scenes/entities/UI_entities/e_popup.tscn" id="6_i525l"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qxkco"]
+a = Vector2(-19, -1)
+b = Vector2(-138, 118)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_14nwd"]
+a = Vector2(234.041, -0.781251)
+b = Vector2(-19.4511, -0.552263)
+
+[node name="A01" type="Node2D"]
+script = ExtResource("1_npo50")
+
+[node name="TileMap_Hometown" parent="." instance=ExtResource("1_1ti1l")]
+layer_0/tile_data = PackedInt32Array(196605, 262144, 1, 196606, 262144, 1, 196607, 262144, 1, 131072, 262144, 1, 131073, 262144, 1, 131074, 262144, 1)
+
+[node name="Owen" parent="." instance=ExtResource("2_qwrva")]
+z_index = 2
+position = Vector2(45, 137)
+
+[node name="PlayerUI" parent="Owen" instance=ExtResource("4_ho1cb")]
+
+[node name="House" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_01bkn")
+metadata/_edit_lock_ = true
+
+[node name="Shower" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(196.75, 102.75)
+scale = Vector2(2.01351, 2.00588)
+texture = ExtResource("4_f1iwd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_qxkco")
+one_way_collision = true
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("SegmentShape2D_14nwd")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-200, 168)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(77, 25, 23, -28, -35, -28, -35, -168, 151, -355, 434, -354, 435, 24, 440, 24, 439, -360, 146, -360, -40, -173, -40, 26)
+
+[node name="Exit_UI" parent="." instance=ExtResource("6_i525l")]
+position = Vector2(50, 56)
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" parent="Exit_UI" index="1"]
+scale = Vector2(0.5, 0.5)
+
+[connection signal="area_entered" from="Exit_UI" to="." method="_on_exit_e_area_entered"]
+[connection signal="area_exited" from="Exit_UI" to="." method="_on_exit_e_area_exited"]
+
+[editable path="Exit_UI"]

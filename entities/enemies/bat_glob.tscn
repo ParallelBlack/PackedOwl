@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddlyycq54q3c2"]
+
+[ext_resource type="Texture2D" uid="uid://bqw1uul4swkh" path="res://assets/sprites/enemies/flying/batGlob.png" id="1_jriif"]
+[ext_resource type="Script" path="res://scenes/entities/enemies/bat_glob.gd" id="1_k7tm4"]
+
+[node name="BatGlob" type="Node2D"]
+script = ExtResource("1_k7tm4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jriif")

@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://lywkppunkbls"]
+
+[ext_resource type="Script" path="res://scenes/menus/Mainmenu.gd" id="1_s8pht"]
+
+[node name="Mainmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s8pht")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 600.0
+color = Color(0.627451, 0.521569, 0.670588, 1)
+
+[node name="Camera2D" type="Camera2D" parent="ColorRect"]
+anchor_mode = 0
+
+[node name="PlayOwen" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 114.0
+offset_right = 270.0
+offset_bottom = 174.0
+
+[node name="Owen" type="Label" parent="ColorRect/PlayOwen"]
+layout_mode = 0
+offset_right = 74.0
+offset_bottom = 31.0
+scale = Vector2(2, 2)
+theme_override_font_sizes/font_size = 16
+text = "Owen"
+
+[node name="PlayIllia" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 114.0
+offset_right = 473.0
+offset_bottom = 176.0
+
+[node name="Illia" type="Label" parent="ColorRect/PlayIllia"]
+layout_mode = 0
+offset_right = 99.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 32
+text = "Illia"
+
+[node name="Exit" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 708.0
+offset_top = 113.0
+offset_right = 856.0
+offset_bottom = 173.0
+
+[node name="Exit" type="Label" parent="ColorRect/Exit"]
+layout_mode = 0
+offset_right = 74.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+text = "Exit"
+
+[connection signal="pressed" from="ColorRect/PlayOwen" to="." method="_on_play_owen_pressed"]
+[connection signal="pressed" from="ColorRect/PlayIllia" to="." method="_on_play_illia_pressed"]
+[connection signal="pressed" from="ColorRect/Exit" to="." method="_on_Exit_pressed"]

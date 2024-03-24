@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ub2eys6w2d7h"]
+
+[ext_resource type="Script" path="res://PathfindingFly.gd" id="1_ccqp5"]
+
+[node name="PathfindingFly" type="Node2D"]
+script = ExtResource("1_ccqp5")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true

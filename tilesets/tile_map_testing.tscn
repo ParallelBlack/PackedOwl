@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0vow31wjkhls"]
+
+[ext_resource type="Texture2D" uid="uid://dbp55ocnyt1fq" path="res://assets/sprites/terrain/testingtiles.png" id="1_ui30l"]
+[ext_resource type="Texture2D" uid="uid://c1ptwj1se2jsh" path="res://assets/sprites/terrain/testingtilesfront.png" id="2_h31l0"]
+[ext_resource type="Texture2D" uid="uid://cl0odwsuxowwl" path="res://assets/sprites/terrain/testingtilesback.png" id="3_2q0d0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0bf7"]
+texture = ExtResource("1_ui30l")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(24, -24, -24, -24, -24, 24, 24, 24)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24, -24, -24)
+
+[sub_resource type="TileSet" id="TileSet_wp87h"]
+tile_size = Vector2i(48, 48)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_e0bf7")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sp426"]
+texture = ExtResource("2_h31l0")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1jduv"]
+tile_size = Vector2i(48, 48)
+sources/0 = SubResource("TileSetAtlasSource_sp426")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_upirl"]
+texture = ExtResource("3_2q0d0")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2hdt1"]
+tile_size = Vector2i(48, 48)
+sources/0 = SubResource("TileSetAtlasSource_upirl")
+
+[node name="TileMapTesting" type="Node"]
+
+[node name="TestingTiles" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_wp87h")
+cell_quadrant_size = 48
+format = 2
+
+[node name="TestingFront" type="TileMap" parent="."]
+z_index = 1
+tile_set = SubResource("TileSet_1jduv")
+cell_quadrant_size = 48
+format = 2
+
+[node name="TestingBack" type="TileMap" parent="."]
+z_index = -1
+tile_set = SubResource("TileSet_2hdt1")
+cell_quadrant_size = 48
+format = 2

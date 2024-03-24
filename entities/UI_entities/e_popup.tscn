@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh7owtji0y88v"]
+
+[ext_resource type="Script" path="res://scenes/entities/UI_entities/e_popup.gd" id="1_gpwky"]
+[ext_resource type="Texture2D" uid="uid://c4k5gspql0iro" path="res://assets/sprites/animations/UI_animations/UI.E.png" id="1_kobhv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dkvqr"]
+size = Vector2(20, 75)
+
+[sub_resource type="Animation" id="Animation_j51j2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hoygb"]
+resource_name = "float"
+length = 4.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8, 3.2, 3.6, 4, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, -2), Vector2(0, -3), Vector2(0, -3.5), Vector2(0, -3.8), Vector2(0, -3.5), Vector2(0, -3), Vector2(0, -2.5), Vector2(0, -2), Vector2(0, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u0qx0"]
+_data = {
+"RESET": SubResource("Animation_j51j2"),
+"float": SubResource("Animation_hoygb")
+}
+
+[node name="E_Popup" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+script = ExtResource("1_gpwky")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 27.5)
+shape = SubResource("RectangleShape2D_dkvqr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kobhv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_u0qx0")
+}

@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4il7h21p3a34"]
+
+[ext_resource type="Script" path="res://scenes/collectibles/sparkle_base.gd" id="1_47u8b"]
+[ext_resource type="Texture2D" uid="uid://dw4jctew08myy" path="res://assets/sprites/animations/SparkleBig-Sheet.png" id="1_fs7xx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11anm"]
+
+[sub_resource type="Animation" id="Animation_1yqd5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fnwd1"]
+resource_name = "glow"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xubl8"]
+_data = {
+"RESET": SubResource("Animation_1yqd5"),
+"glow": SubResource("Animation_fnwd1")
+}
+
+[node name="SparkleBase" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_47u8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_11anm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fs7xx")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xubl8")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
