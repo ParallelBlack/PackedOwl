@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://du6q2awixpiqt"]
+
+[node name="DBOXTimerHandler" type="Node"]
+
+[node name="DBOXTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="DBOXTimer2" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="DBOXTimer3" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="DBOXTimer4" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="DBOXTimer5" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="DBOXTimer6" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true

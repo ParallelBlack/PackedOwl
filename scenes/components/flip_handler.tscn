@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmki48b12f6if"]
+
+[ext_resource type="Script" path="res://FlipHandler.gd" id="1_pxm7y"]
+
+[node name="FlipHandler" type="Node2D"]
+script = ExtResource("1_pxm7y")
